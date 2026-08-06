@@ -1,8 +1,8 @@
 let qrInstance = null;
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Inicializar QR inicial con datos de ejemplo
-    const initialUrl = document.getElementById("in-url").value;
+    // Inicializar QR inicial con URL base o fallback
+    const initialUrl = document.getElementById("in-url").value.trim() || "https://instagram.com";
     qrInstance = new QRCode(document.getElementById("qr-code"), {
         text: initialUrl,
         width: 220,
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         correctLevel: QRCode.CorrectLevel.H
     });
 
-    // Event Listeners para reactividad en tiempo real
+    // Escuchadores de eventos para actualización reactiva
     document.getElementById("in-title").addEventListener("input", updateCard);
     document.getElementById("in-subtitle").addEventListener("input", updateCard);
     document.getElementById("in-quote").addEventListener("input", updateCard);
@@ -28,9 +28,9 @@ function updateCard() {
     const subtitleVal = document.getElementById("in-subtitle").value.trim();
     const quoteVal = document.getElementById("in-quote").value.trim();
 
-    document.getElementById("out-title").innerText = titleVal || "EJEMPLO TÍTULO";
-    document.getElementById("out-subtitle").innerText = subtitleVal || "EJEMPLO SUBTÍTULO";
-    document.getElementById("out-quote").innerText = quoteVal ? `"${quoteVal.replace(/^"|"$/g, '')}"` : '"Ejemplo de frase de cierre..."';
+    document.getElementById("out-title").innerText = titleVal || "TÍTULO / NOMBRE";
+    document.getElementById("out-subtitle").innerText = subtitleVal || "SUBTÍTULO / PROFESIÓN";
+    document.getElementById("out-quote").innerText = quoteVal ? `"${quoteVal.replace(/^"|"$/g, '')}"` : '"Frase de cierre o instrucción..."';
 }
 
 function updateQR() {
