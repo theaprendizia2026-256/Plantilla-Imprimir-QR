@@ -3,11 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plantilla QR  -  Impresión</title><!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plantilla QR - Generador de Impresión</title>
     
     <!-- Google Fonts -->
@@ -15,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
 
-    <!-- Estilos locales -->
+    <!-- Estilo local en la raíz -->
     <link rel="stylesheet" href="style.css">
 
     <!-- Librerías Client-Side CDN -->
@@ -31,22 +26,22 @@
         
         <div class="form-group">
             <label for="in-title">Título / Nombre</label>
-            <input type="text" id="in-title" placeholder="Ej: GERARDO JARA" value="GERARDO JARA">
+            <input type="text" id="in-title" placeholder="Ej: GERARDO JARA">
         </div>
 
         <div class="form-group">
             <label for="in-subtitle">Subtítulo / Profesión</label>
-            <input type="text" id="in-subtitle" placeholder="Ej: DIBUJANTE" value="DIBUJANTE">
+            <input type="text" id="in-subtitle" placeholder="Ej: DIBUJANTE">
         </div>
 
         <div class="form-group">
             <label for="in-url">URL Destino (QR)</label>
-            <input type="text" id="in-url" placeholder="https://tu-enlace.com" value="https://instagram.com">
+            <input type="text" id="in-url" placeholder="https://instagram.com" value="https://instagram.com">
         </div>
 
         <div class="form-group">
             <label for="in-quote">Frase de Cierre</label>
-            <input type="text" id="in-quote" placeholder="Ej: Dibujo al grafito: volumen, textura y realismo..." value="Dibujo al grafito: volumen, textura y realismo en cada detalle.">
+            <input type="text" id="in-quote" placeholder="Ej: Dibujo al grafito: volumen, textura y realismo...">
         </div>
 
         <div class="form-group">
@@ -73,8 +68,8 @@
     <main class="preview-container">
         <div class="frame-canvas" id="card-node">
             <header class="header-block">
-                <h1 class="header-title" id="out-title">GERARDO JARA</h1>
-                <p class="header-subtitle" id="out-subtitle">DIBUJANTE</p>
+                <h1 class="header-title" id="out-title">TÍTULO / NOMBRE</h1>
+                <p class="header-subtitle" id="out-subtitle">SUBTÍTULO / PROFESIÓN</p>
             </header>
 
             <section class="qr-block">
@@ -85,44 +80,12 @@
             </section>
 
             <footer class="footer-block">
-                <p class="footer-quote" id="out-quote">"Dibujo al grafito: volumen, textura y realismo en cada detalle."</p>
+                <p class="footer-quote" id="out-quote">"Frase de cierre o instrucción..."</p>
             </footer>
         </div>
     </main>
 
-    <!-- Lógica JavaScript -->
+    <!-- Lógica local en la raíz -->
     <script src="app.js"></script>
-</body>
-</html>
-    <!-- Fuentes elegantes de Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
-    <!-- Vinculación a hoja de estilos -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-    <div class="frame-canvas">
-        <!-- Encabezado -->
-        <div class="header-block">
-            <h1 class="header-title">...TITULO...</h1>
-            <p class="header-subtitle">...Subtitulo...</p>
-        </div>
-
-        <!-- Código QR -->
-        <div class="qr-block">
-            <div class="qr-wrapper">
-                <img src="https://res.cloudinary.com/deqk2tmer/image/upload/v1785710299/QR_r21oty.png" alt="Código QR">
-            </div>
-            <p class="qr-instruction">Escanear QR</p>
-        </div>
-
-        <!-- Pie de página elevado del borde -->
-        <div class="footer-block">
-            <p class="footer-quote">"...Fraces o instrucciones..."</p>
-        </div>
-    </div>
-
 </body>
 </html>
