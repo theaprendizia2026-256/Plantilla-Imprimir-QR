@@ -4,7 +4,7 @@ Sistema cliente dinámico para la maquetación, renderizado en tiempo real y exp
 
 ---
 <div align="center">
-  <img src="https://res.cloudinary.com/deqk2tmer/image/upload/v1785710300/screenshot_pp63ep.jpg" width="250" alt="Captura de la Tarjeta Digital">
+  <img src="[https://res.cloudinary.com/deqk2tmer/image/upload/v1785710300/screenshot_pp63ep.jpg](https://res.cloudinary.com/deqk2tmer/image/upload/v1786026844/Imprimir_QR_abivba.png)" width="250" alt="Captura de la Tarjeta Digital">
   <p><i>Interfaz optimizada para dispositivos móviles con política de Zero-Scroll.</i></p>
 </div>
 
