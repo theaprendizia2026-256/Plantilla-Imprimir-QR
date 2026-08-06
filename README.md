@@ -3,6 +3,12 @@
 Sistema cliente dinámico para la maquetación, renderizado en tiempo real y exportación vectorial de fichas y tarjetas de exhibición gráfica en formato cuadrado rígido. Diseñado bajo una arquitectura ligera *Single-Page Application* (SPA) estática, optimizada para procesamiento de alta fidelidad en lado de cliente (*Client-Side Processing*).
 
 ---
+<div align="center">
+  <img src="https://res.cloudinary.com/deqk2tmer/image/upload/v1785710300/screenshot_pp63ep.jpg" width="250" alt="Captura de la Tarjeta Digital">
+  <p><i>Interfaz optimizada para dispositivos móviles con política de Zero-Scroll.</i></p>
+</div>
+
+---
 
 ## 1. ESPECIFICACIONES TÉCNICAS Y ARQUITECTURA
 
