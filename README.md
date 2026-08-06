@@ -4,7 +4,7 @@ Sistema cliente dinámico para la maquetación, renderizado en tiempo real y exp
 
 ---
 <div align="center">
-  <img src="https://res.cloudinary.com/deqk2tmer/image/upload/v1786026844/Imprimir_QR_abivba.png" width="250" alt="Captura de la Interfaz">
+  <img src="https://res.cloudinary.com/deqk2tmer/image/upload/v1786026844/Imprimir_QR_abivba.png" width="350" alt="Captura de la Interfaz">
   <p><i>Interfaz de la WEB.</i></p>
 </div>
 
