@@ -1,23 +1,31 @@
-# Plantilla QR Cuadrada 
+# Plantilla QR Cuadrada - Software Architecture & Technical Documentation
 
-Plantilla de maquetación web minimalista diseñada para fichas y tarjetas de exhibición artística en formato cuadrado, optimizada tanto para previsualización web como para salida de impresión de alta fidelidad.
+Sistema cliente dinámico para la maquetación, renderizado en tiempo real y exportación vectorial de fichas y tarjetas de exhibición gráfica en formato cuadrado rígido. Diseñado bajo una arquitectura ligera *Single-Page Application* (SPA) estática, optimizada para procesamiento de alta fidelidad en lado de cliente (*Client-Side Processing*).
 
-## 🛠️ Especificaciones Técnicas
+---
 
-- **Dimensiones:** Ejemplo `450px x 450px` (Pantalla) /.
-- **Tipografías:** *Cinzel* (Encabezados y Frase) y *Montserrat* (Subtítulos e Instrucción) cargadas desde Google Fonts CDN.
-- **Assets:** Textura de lienzo Canson y recurso de imagen QR servidos desde CDN externa (Cloudinary).
-- **Layout Engine:** Flexbox estricto con reset de márgenes para asegurar alineación axial centrada sin desbordes técnicos.
+## 1. ESPECIFICACIONES TÉCNICAS Y ARQUITECTURA
 
-## 🖨️ Modo de Impresión
+- **Motor de Renderizado UI:** HTML5 semántico (`<aside>` / `<main>`), CSS3 Flexbox estricto con distribución axial aislada.
+- **Lógica de Dominio:** JavaScript ES6+ (Event-driven paradigm, sin dependencias de frameworks pesados).
+- **Procesamiento Gráfico Client-Side:**
+  - `QRCode.js`: Generación dinámica de código matriz QR sobre canvas HTML5.
+  - `html2canvas v1.4.1`: Captura del árbol DOM (`#card-node`) y conversión a rasterizado de alta densidad pixelar (Scale Factor = 3).
+  - `jsPDF v2.5.1`: Compilación e inyección de mapa de bits a documento vectorial PDF con formato cuadrado físico exacto ($10 \times 10\text{ cm}$, $15 \times 15\text{ cm}$, $20 \times 20\text{ cm}$).
+- **Tipografías y Assets CDN:**
+  - *Cinzel* (Encabezados/Titular) & *Montserrat* (Cuerpo/Instrucciones) vía Google Fonts.
+  - Textura de fondo (Canson Paper Engine) servida desde CDN dedicada.
 
-1. Abrir `index.html` en el navegador.
-2. Ejecutar comando de impresión (`Ctrl + P` o `Cmd + P`).
-3. Activar la opción **"Gráficos de fondo"** (*Background Graphics*) en las opciones avanzadas del navegador para incluir la textura del papel.
-4. Definir márgenes en **"Ninguno"**.
+---
 
-## 📄 Estructura del Repositorio
+## 2. ESTRUCTURA DEL REPOSITORIO
 
-- `index.html` : Marcado semántico del lienzo.
-- `style.css` : Hoja de estilos con reglas de diseño e impresión media-queries.
-- `LICENSE` : Licencia de código abierto MIT.
+La arquitectura mantiene una jerarquía plana para garantizar la máxima velocidad de ejecución y mínima fricción en el despliegue:
+
+```text
+/
+├── app.js         # Lógica de reactividad DOM, manipulación de QR y exportación a PDF/WhatsApp
+├── index.html     # Estructura semántica, panel de operadores y contenedor Canvas
+├── style.css      # Reglas tipográficas, aislamiento de contenedores y diseño adaptativo
+├── LICENSE.txt    # Licencia de distribución de código abierto
+└── README.md      # Documentación técnica del sistema
