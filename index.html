@@ -3,7 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plantilla QR  -  Impresión</title>
+    <title>Plantilla QR  -  Impresión</title><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantilla QR - Generador de Impresión</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Estilos locales -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Librerías Client-Side CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+    <!-- Panel de Control Operador -->
+    <aside class="control-panel">
+        <h2>Configuración</h2>
+        
+        <div class="form-group">
+            <label for="in-title">Título / Nombre</label>
+            <input type="text" id="in-title" placeholder="Ej: GERARDO JARA" value="GERARDO JARA">
+        </div>
+
+        <div class="form-group">
+            <label for="in-subtitle">Subtítulo / Profesión</label>
+            <input type="text" id="in-subtitle" placeholder="Ej: DIBUJANTE" value="DIBUJANTE">
+        </div>
+
+        <div class="form-group">
+            <label for="in-url">URL Destino (QR)</label>
+            <input type="text" id="in-url" placeholder="https://tu-enlace.com" value="https://instagram.com">
+        </div>
+
+        <div class="form-group">
+            <label for="in-quote">Frase de Cierre</label>
+            <input type="text" id="in-quote" placeholder="Ej: Dibujo al grafito: volumen, textura y realismo..." value="Dibujo al grafito: volumen, textura y realismo en cada detalle.">
+        </div>
+
+        <div class="form-group">
+            <label for="in-size">Tamaño de Salida (PDF)</label>
+            <select id="in-size">
+                <option value="10">10 x 10 cm (Estándar)</option>
+                <option value="15">15 x 15 cm (Mediano)</option>
+                <option value="20">20 x 20 cm (Grande)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="in-phone">WhatsApp Cliente (Opcional)</label>
+            <input type="text" id="in-phone" placeholder="Ej: 56912345678">
+        </div>
+
+        <div class="btn-group">
+            <button id="btn-pdf" class="btn-pdf">Descargar PDF para Imprenta</button>
+            <button id="btn-ws" class="btn-ws">Enviar por WhatsApp</button>
+        </div>
+    </aside>
+
+    <!-- Vista Previa Canvas -->
+    <main class="preview-container">
+        <div class="frame-canvas" id="card-node">
+            <header class="header-block">
+                <h1 class="header-title" id="out-title">GERARDO JARA</h1>
+                <p class="header-subtitle" id="out-subtitle">DIBUJANTE</p>
+            </header>
+
+            <section class="qr-block">
+                <div class="qr-wrapper">
+                    <div id="qr-code"></div>
+                </div>
+                <p class="qr-instruction">Escanear QR</p>
+            </section>
+
+            <footer class="footer-block">
+                <p class="footer-quote" id="out-quote">"Dibujo al grafito: volumen, textura y realismo en cada detalle."</p>
+            </footer>
+        </div>
+    </main>
+
+    <!-- Lógica JavaScript -->
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
     <!-- Fuentes elegantes de Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
