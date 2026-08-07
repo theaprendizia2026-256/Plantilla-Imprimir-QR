@@ -44,6 +44,10 @@
             <input type="text" id="in-quote" placeholder="Ej: Dibujo al grafito: volumen, textura y realismo...">
         </div>
 
+        <div class="form-group">
+            <label for="in-logo">Logo Central (Opcional)</label>
+            <input type="file" id="in-logo" accept="image/*">
+        </div>
         <!-- Módulo 1: Tono de Papel Canson -->
         <div class="form-group">
             <label for="in-paper-color">Tono de Papel (Textura Canson)</label>
@@ -93,11 +97,14 @@
             </header>
 
             <section class="qr-block">
-                <div class="qr-wrapper">
-                    <div id="qr-code"></div>
+               <div class="qr-wrapper" style="position: relative; display: inline-block;">
+                  <div id="qr-code"></div>
+                  <div id="qr-logo-container" class="qr-logo-overlay" style="display: none;">
+                     <img id="qr-logo-img" src="" alt="Logo QR">
+                  </div>
                 </div>
-                <p class="qr-instruction">Escanear QR</p>
-            </section>
+              <p class="qr-instruction">Escanear QR</p>
+           </section>
 
             <footer class="footer-block">
                 <p class="footer-quote" id="out-quote">"Frase de cierre o instrucción..."</p>
