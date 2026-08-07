@@ -76,8 +76,7 @@ async function exportPDF() {
     const paperColor = document.getElementById("in-paper-color").value;
     const cardNode = document.getElementById("card-node");
 
-    // BLINDEO ANTI-FONDO NEGRO:
-    // Se fuerza el backgroundColor opaco exactamente al tono de papel seleccionado
+    // Capture con fondo sólido
     const canvas = await html2canvas(cardNode, {
         scale: 3,
         useCORS: true,
@@ -87,13 +86,24 @@ async function exportPDF() {
 
     const imgData = canvas.toDataURL('image/jpeg', 1.0);
 
+    // Creamos la hoja en formato Estándar Carta/A4 (o hoja de imprenta)
+    // Para que la tarjeta quede perfectamente centrada en la hoja
     const pdf = new jsPDF({
-        orientation: 'square',
+        orientation: 'portrait',
         unit: 'cm',
-        format: [sizeCm, sizeCm]
+        format: 'letter' // Hoja Carta estándar para imprenta/casa
     });
 
-    pdf.addImage(imgData, 'JPEG', 0, 0, sizeCm, sizeCm);
+    // Dimensiones de hoja Carta en cm
+    const pageWidth = 21.59;
+    const pageHeight = 27.94;
+
+    // Cálculo del centro exacto
+    const x = (pageWidth - sizeCm) / 2;
+    const y = (pageHeight - sizeCm) / 2;
+
+    // Dibujamos la tarjeta centrada con su tamaño exacto
+    pdf.addImage(imgData, 'JPEG', x, y, sizeCm, sizeCm);
     
     const fileName = `Tarjeta_QR_${sizeCm}x${sizeCm}cm.pdf`;
     pdf.save(fileName);
