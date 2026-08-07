@@ -48,6 +48,7 @@
             <label for="in-logo">Logo Central (Opcional)</label>
             <input type="file" id="in-logo" accept="image/*">
         </div>
+
         <!-- Módulo 1: Tono de Papel Canson -->
         <div class="form-group">
             <label for="in-paper-color">Tono de Papel (Textura Canson)</label>
@@ -75,7 +76,7 @@
             <input type="number" id="in-custom-cm" placeholder="Ej: 12.5" min="5" max="50" step="0.5" value="12">
         </div>
 
-        <!-- Módulo 3: WhatsApp Opcional con nota aclaratoria -->
+        <!-- Módulo 3: WhatsApp Opcional -->
         <div class="form-group">
             <label for="in-phone">WhatsApp Cliente (Opcional)</label>
             <input type="text" id="in-phone" placeholder="Ej: 56912345678">
@@ -97,14 +98,12 @@
             </header>
 
             <section class="qr-block">
-             <div class="qr-wrapper">
-              <div id="qr-code"></div>
-              <div id="qr-logo-container" class="qr-logo-overlay" style="display: none;">
-               <img id="qr-logo-img" src="" alt="Logo QR">
-               </div>
-            </div>
-            <p class="qr-instruction">Escanear QR</p>
-         </section>
+                <div class="qr-wrapper">
+                    <!-- Único contenedor necesario; JS dibujará el QR + Logo en un canvas interno -->
+                    <div id="qr-code"></div>
+                </div>
+                <p class="qr-instruction">Escanear QR</p>
+            </section>
 
             <footer class="footer-block">
                 <p class="footer-quote" id="out-quote">"Frase de cierre o instrucción..."</p>
