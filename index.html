@@ -10,10 +10,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
 
-    <!-- Estilo local en la raíz -->
+    <!-- Estilo local -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Librerías Client-Side CDN -->
+    <!-- Librerías CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -44,18 +44,38 @@
             <input type="text" id="in-quote" placeholder="Ej: Dibujo al grafito: volumen, textura y realismo...">
         </div>
 
+        <!-- Módulo 1: Tono de Papel Canson -->
+        <div class="form-group">
+            <label for="in-paper-color">Tono de Papel (Textura Canson)</label>
+            <select id="in-paper-color">
+                <option value="#f7f5f0">Crema Marfil (Clásico)</option>
+                <option value="#ffffff">Blanco Puro / Técnico</option>
+                <option value="#e8e4d9">Gris Cálido / Texturado</option>
+                <option value="#f0eae1">Arena Suave</option>
+            </select>
+        </div>
+
+        <!-- Módulo 2: Tamaño de PDF con Personalizado -->
         <div class="form-group">
             <label for="in-size">Tamaño de Salida (PDF)</label>
             <select id="in-size">
                 <option value="10">10 x 10 cm (Estándar)</option>
                 <option value="15">15 x 15 cm (Mediano)</option>
                 <option value="20">20 x 20 cm (Grande)</option>
+                <option value="custom">Personalizado...</option>
             </select>
         </div>
 
+        <div class="form-group" id="group-custom-size" style="display: none;">
+            <label for="in-custom-cm">Medida Personalizada (cm)</label>
+            <input type="number" id="in-custom-cm" placeholder="Ej: 12.5" min="5" max="50" step="0.5" value="12">
+        </div>
+
+        <!-- Módulo 3: WhatsApp Opcional con nota aclaratoria -->
         <div class="form-group">
-            <label for="in-phone">WhatsApp Cliente (Envio por WS, Opcional)</label>
+            <label for="in-phone">WhatsApp Cliente (Opcional)</label>
             <input type="text" id="in-phone" placeholder="Ej: 56912345678">
+            <small class="help-text">Opcional. Permite abrir un chat directo con el PDF listo.</small>
         </div>
 
         <div class="btn-group">
@@ -85,7 +105,6 @@
         </div>
     </main>
 
-    <!-- Lógica local en la raíz -->
     <script src="app.js"></script>
 </body>
 </html>
