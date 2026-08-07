@@ -1,10 +1,45 @@
-let qrInstance = null;
+let uploadedLogoSrc = null;
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Inicializar QR
-    const initialUrl = document.getElementById("in-url").value.trim() || "https://instagram.com";
-    qrInstance = new QRCode(document.getElementById("qr-code"), {
-        text: initialUrl,
+    // Inicializar QR y eventos
+    renderQR();
+
+    document.getElementById("in-title").addEventListener("input", updateCard);
+    document.getElementById("in-subtitle").addEventListener("input", updateCard);
+    document.getElementById("in-quote").addEventListener("input", updateCard);
+    document.getElementById("in-url").addEventListener("input", renderQR);
+    document.getElementById("in-logo").addEventListener("change", handleLogoUpload);
+    document.getElementById("in-paper-color").addEventListener("change", updatePaperColor);
+    document.getElementById("in-size").addEventListener("change", toggleCustomSizeInput);
+
+    document.getElementById("btn-pdf").addEventListener("click", exportPDF);
+    document.getElementById("btn-ws").addEventListener("click", sendWhatsApp);
+
+    updatePaperColor();
+});
+
+function handleLogoUpload(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+            uploadedLogoSrc = evt.target.result;
+            renderQR();
+        };
+        reader.readAsDataURL(file);
+    } else {
+        uploadedLogoSrc = null;
+        renderQR();
+    }
+}
+
+function renderQR() {
+    const url = document.getElementById("in-url").value.trim() || "https://instagram.com";
+    const qrContainer = document.getElementById("qr-code");
+    qrContainer.innerHTML = "";
+
+    new QRCode(qrContainer, {
+        text: url,
         width: 220,
         height: 220,
         colorDark: "#000000",
@@ -12,46 +47,42 @@ document.addEventListener("DOMContentLoaded", () => {
         correctLevel: QRCode.CorrectLevel.H
     });
 
-    // Escuchadores de eventos para actualización reactiva
-    document.getElementById("in-title").addEventListener("input", updateCard);
-    document.getElementById("in-subtitle").addEventListener("input", updateCard);
-    document.getElementById("in-quote").addEventListener("input", updateCard);
-    document.getElementById("in-url").addEventListener("input", updateQR);
-
-    // Módulo Logo Central: Escuchador de carga de imagen
-    document.getElementById("in-logo").addEventListener("change", handleLogoUpload);
-
-    // Cambio de Tono de Papel
-    document.getElementById("in-paper-color").addEventListener("change", updatePaperColor);
-
-    // Selector de Tamaño Personalizado
-    document.getElementById("in-size").addEventListener("change", toggleCustomSizeInput);
-
-    // Botones de acción
-    document.getElementById("btn-pdf").addEventListener("click", exportPDF);
-    document.getElementById("btn-ws").addEventListener("click", sendWhatsApp);
-
-    // Inicializar color de papel
-    updatePaperColor();
-});
-
-// Función para procesar y cargar el logo en el centro del QR
-function handleLogoUpload(e) {
-    const file = e.target.files[0];
-    const logoContainer = document.getElementById("qr-logo-container");
-    const logoImg = document.getElementById("qr-logo-img");
-
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-            logoImg.src = evt.target.result;
-            logoContainer.style.display = "flex";
-        };
-        reader.readAsDataURL(file);
-    } else {
-        logoContainer.style.display = "none";
-        logoImg.src = "";
+    if (uploadedLogoSrc) {
+        setTimeout(() => {
+            const canvas = qrContainer.querySelector("canvas");
+            if (canvas) drawLogoOnCanvas(canvas, uploadedLogoSrc);
+        }, 50);
     }
+}
+
+function drawLogoOnCanvas(canvas, logoSrc) {
+    const ctx = canvas.getContext("2d");
+    const logo = new Image();
+    logo.src = logoSrc;
+
+    logo.onload = () => {
+        const qrSize = canvas.width;
+        const logoSize = qrSize * 0.22;
+        const center = (qrSize - logoSize) / 2;
+
+        ctx.save();
+        
+        // 1. Fondo blanco circular tras el logo para evitar interferencia del QR
+        ctx.beginPath();
+        ctx.arc(qrSize / 2, qrSize / 2, (logoSize / 2) + 2, 0, Math.PI * 2);
+        ctx.fillStyle = "#ffffff";
+        ctx.fill();
+
+        // 2. Máscara circular para el logo
+        ctx.beginPath();
+        ctx.arc(qrSize / 2, qrSize / 2, logoSize / 2, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.clip();
+
+        // 3. Dibujo de la imagen
+        ctx.drawImage(logo, center, center, logoSize, logoSize);
+        ctx.restore();
+    };
 }
 
 function updateCard() {
@@ -62,14 +93,6 @@ function updateCard() {
     document.getElementById("out-title").innerText = titleVal || "TÍTULO / NOMBRE";
     document.getElementById("out-subtitle").innerText = subtitleVal || "SUBTÍTULO / PROFESIÓN";
     document.getElementById("out-quote").innerText = quoteVal ? `"${quoteVal.replace(/^"|"$/g, '')}"` : '"Frase de cierre o instrucción..."';
-}
-
-function updateQR() {
-    const url = document.getElementById("in-url").value.trim();
-    if (qrInstance && url !== "") {
-        qrInstance.clear();
-        qrInstance.makeCode(url);
-    }
 }
 
 function updatePaperColor() {
@@ -98,7 +121,6 @@ async function exportPDF() {
     const paperColor = document.getElementById("in-paper-color").value;
     const cardNode = document.getElementById("card-node");
 
-    // Capture con fondo sólido
     const canvas = await html2canvas(cardNode, {
         scale: 3,
         useCORS: true,
@@ -108,7 +130,6 @@ async function exportPDF() {
 
     const imgData = canvas.toDataURL('image/jpeg', 1.0);
 
-    // Hoja Carta estándar centrada
     const pdf = new jsPDF({
         orientation: 'portrait',
         unit: 'cm',
