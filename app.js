@@ -18,6 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("in-quote").addEventListener("input", updateCard);
     document.getElementById("in-url").addEventListener("input", updateQR);
 
+    // Módulo Logo Central: Escuchador de carga de imagen
+    document.getElementById("in-logo").addEventListener("change", handleLogoUpload);
+
     // Cambio de Tono de Papel
     document.getElementById("in-paper-color").addEventListener("change", updatePaperColor);
 
@@ -31,6 +34,25 @@ document.addEventListener("DOMContentLoaded", () => {
     // Inicializar color de papel
     updatePaperColor();
 });
+
+// Función para procesar y cargar el logo en el centro del QR
+function handleLogoUpload(e) {
+    const file = e.target.files[0];
+    const logoContainer = document.getElementById("qr-logo-container");
+    const logoImg = document.getElementById("qr-logo-img");
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+            logoImg.src = evt.target.result;
+            logoContainer.style.display = "flex";
+        };
+        reader.readAsDataURL(file);
+    } else {
+        logoContainer.style.display = "none";
+        logoImg.src = "";
+    }
+}
 
 function updateCard() {
     const titleVal = document.getElementById("in-title").value.trim();
@@ -86,23 +108,19 @@ async function exportPDF() {
 
     const imgData = canvas.toDataURL('image/jpeg', 1.0);
 
-    // Creamos la hoja en formato Estándar Carta/A4 (o hoja de imprenta)
-    // Para que la tarjeta quede perfectamente centrada en la hoja
+    // Hoja Carta estándar centrada
     const pdf = new jsPDF({
         orientation: 'portrait',
         unit: 'cm',
-        format: 'letter' // Hoja Carta estándar para imprenta/casa
+        format: 'letter'
     });
 
-    // Dimensiones de hoja Carta en cm
     const pageWidth = 21.59;
     const pageHeight = 27.94;
 
-    // Cálculo del centro exacto
     const x = (pageWidth - sizeCm) / 2;
     const y = (pageHeight - sizeCm) / 2;
 
-    // Dibujamos la tarjeta centrada con su tamaño exacto
     pdf.addImage(imgData, 'JPEG', x, y, sizeCm, sizeCm);
     
     const fileName = `Tarjeta_QR_${sizeCm}x${sizeCm}cm.pdf`;
