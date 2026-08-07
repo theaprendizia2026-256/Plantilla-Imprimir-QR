@@ -162,7 +162,9 @@ async function sendWhatsApp() {
     const fileName = await exportPDF();
     const phone = document.getElementById("in-phone").value.replace(/[^0-9]/g, '');
     const sizeCm = getSelectedSizeCm();
-    const msg = encodeURIComponent(`¡Hola! Te adjunto tu tarjeta lista para imprimir en tamaño exacto (${sizeCm}x${sizeCm} cm).`);
+    
+    // Mensaje adaptado: notifica la medida y avisa que el archivo va en camino
+    const msg = encodeURIComponent(`¡Hola! A continuación te envío tu plantilla QR para imprimir (${sizeCm}x${sizeCm} cm). Adjunto el archivo PDF a continuación...`);
     
     const targetUrl = phone ? `https://wa.me/${phone}?text=${msg}` : `https://wa.me/?text=${msg}`;
     window.open(targetUrl, '_blank');
