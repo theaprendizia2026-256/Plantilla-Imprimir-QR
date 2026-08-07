@@ -166,9 +166,7 @@ button:hover {
     justify-content: center;
 }
 
-/* AQUÍ ESTÁ LA CLAVE: position: relative permite centrar el logo respecto al QR */
 .qr-wrapper {
-    position: relative;
     background: #ffffff;
     padding: 8px;
     border-radius: 4px;
@@ -189,32 +187,6 @@ button:hover {
     color: #333333;
     margin-top: 6px;
     letter-spacing: 0.5px;
-}
-
-/* Capa del Logo Centrado en el QR */
-.qr-logo-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: #ffffff;
-    border: 2px solid #ffffff;
-    overflow: hidden;
-    box-shadow: 0 0 4px rgba(0,0,0,0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-}
-
-.qr-logo-overlay img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
 }
 
 /* Bloque 3: Frase de Cierre Centrada */
