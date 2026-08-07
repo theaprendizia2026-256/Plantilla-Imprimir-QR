@@ -1,7 +1,7 @@
 let qrInstance = null;
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Inicializar QR inicial con URL base o fallback
+    // Inicializar QR
     const initialUrl = document.getElementById("in-url").value.trim() || "https://instagram.com";
     qrInstance = new QRCode(document.getElementById("qr-code"), {
         text: initialUrl,
@@ -18,9 +18,18 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("in-quote").addEventListener("input", updateCard);
     document.getElementById("in-url").addEventListener("input", updateQR);
 
+    // Cambio de Tono de Papel
+    document.getElementById("in-paper-color").addEventListener("change", updatePaperColor);
+
+    // Selector de Tamaño Personalizado
+    document.getElementById("in-size").addEventListener("change", toggleCustomSizeInput);
+
     // Botones de acción
     document.getElementById("btn-pdf").addEventListener("click", exportPDF);
     document.getElementById("btn-ws").addEventListener("click", sendWhatsApp);
+
+    // Inicializar color de papel
+    updatePaperColor();
 });
 
 function updateCard() {
@@ -41,15 +50,39 @@ function updateQR() {
     }
 }
 
+function updatePaperColor() {
+    const selectedColor = document.getElementById("in-paper-color").value;
+    document.getElementById("card-node").style.backgroundColor = selectedColor;
+}
+
+function toggleCustomSizeInput() {
+    const sizeSelect = document.getElementById("in-size").value;
+    const customGroup = document.getElementById("group-custom-size");
+    customGroup.style.display = (sizeSelect === "custom") ? "flex" : "none";
+}
+
+function getSelectedSizeCm() {
+    const sizeSelect = document.getElementById("in-size").value;
+    if (sizeSelect === "custom") {
+        const customValue = parseFloat(document.getElementById("in-custom-cm").value);
+        return (!isNaN(customValue) && customValue > 0) ? customValue : 10;
+    }
+    return parseFloat(sizeSelect);
+}
+
 async function exportPDF() {
     const { jsPDF } = window.jspdf;
-    const sizeCm = parseFloat(document.getElementById("in-size").value);
+    const sizeCm = getSelectedSizeCm();
+    const paperColor = document.getElementById("in-paper-color").value;
     const cardNode = document.getElementById("card-node");
 
+    // BLINDEO ANTI-FONDO NEGRO:
+    // Se fuerza el backgroundColor opaco exactamente al tono de papel seleccionado
     const canvas = await html2canvas(cardNode, {
         scale: 3,
         useCORS: true,
-        allowTaint: true
+        allowTaint: true,
+        backgroundColor: paperColor
     });
 
     const imgData = canvas.toDataURL('image/jpeg', 1.0);
@@ -70,7 +103,7 @@ async function exportPDF() {
 async function sendWhatsApp() {
     const fileName = await exportPDF();
     const phone = document.getElementById("in-phone").value.replace(/[^0-9]/g, '');
-    const sizeCm = document.getElementById("in-size").value;
+    const sizeCm = getSelectedSizeCm();
     const msg = encodeURIComponent(`¡Hola! Te adjunto tu tarjeta lista para imprimir en tamaño exacto (${sizeCm}x${sizeCm} cm).`);
     
     const targetUrl = phone ? `https://wa.me/${phone}?text=${msg}` : `https://wa.me/?text=${msg}`;
