@@ -1,7 +1,6 @@
 let uploadedLogoSrc = null;
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Inicializar QR y eventos
     renderQR();
 
     document.getElementById("in-title").addEventListener("input", updateCard);
@@ -38,6 +37,7 @@ function renderQR() {
     const qrContainer = document.getElementById("qr-code");
     qrContainer.innerHTML = "";
 
+    // 1. Instanciar el QR
     new QRCode(qrContainer, {
         text: url,
         width: 220,
@@ -47,12 +47,21 @@ function renderQR() {
         correctLevel: QRCode.CorrectLevel.H
     });
 
-    if (uploadedLogoSrc) {
-        setTimeout(() => {
-            const canvas = qrContainer.querySelector("canvas");
-            if (canvas) drawLogoOnCanvas(canvas, uploadedLogoSrc);
-        }, 50);
-    }
+    // 2. Procesar el canvas
+    setTimeout(() => {
+        const canvas = qrContainer.querySelector("canvas");
+        const img = qrContainer.querySelector("img");
+
+        if (canvas) {
+            // Aseguramos que el Canvas sea visible y la imagen generada por QRCode.js se oculte
+            canvas.style.display = "block";
+            if (img) img.style.display = "none";
+
+            if (uploadedLogoSrc) {
+                drawLogoOnCanvas(canvas, uploadedLogoSrc);
+            }
+        }
+    }, 100);
 }
 
 function drawLogoOnCanvas(canvas, logoSrc) {
@@ -62,24 +71,24 @@ function drawLogoOnCanvas(canvas, logoSrc) {
 
     logo.onload = () => {
         const qrSize = canvas.width;
-        const logoSize = qrSize * 0.22;
+        const logoSize = qrSize * 0.22; // 22% del tamaño total
         const center = (qrSize - logoSize) / 2;
 
         ctx.save();
         
-        // 1. Fondo blanco circular tras el logo para evitar interferencia del QR
+        // 1. Fondo blanco circular protector
         ctx.beginPath();
-        ctx.arc(qrSize / 2, qrSize / 2, (logoSize / 2) + 2, 0, Math.PI * 2);
+        ctx.arc(qrSize / 2, qrSize / 2, (logoSize / 2) + 3, 0, Math.PI * 2);
         ctx.fillStyle = "#ffffff";
         ctx.fill();
 
-        // 2. Máscara circular para el logo
+        // 2. Recorte circular para el logo
         ctx.beginPath();
         ctx.arc(qrSize / 2, qrSize / 2, logoSize / 2, 0, Math.PI * 2);
         ctx.closePath();
         ctx.clip();
 
-        // 3. Dibujo de la imagen
+        // 3. Dibujar la imagen de forma limpia
         ctx.drawImage(logo, center, center, logoSize, logoSize);
         ctx.restore();
     };
