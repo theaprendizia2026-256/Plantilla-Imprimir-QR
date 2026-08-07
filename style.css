@@ -115,12 +115,10 @@ button:hover {
     align-items: center;
 }
 
+/* CORREGIDO: Se eliminó background-image que causaba la pantalla negra */
 .frame-canvas {
     width: 450px;
     height: 450px;
-    background-image: url('https://res.cloudinary.com/deqk2tmer/image/upload/v1785710299/textura_papel_canson.jpg');
-    background-size: cover;
-    background-position: center;
     background-color: #f7f5f0;
     border: 1px solid rgba(0, 0, 0, 0.3);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
