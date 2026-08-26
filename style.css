@@ -124,10 +124,10 @@ button:hover {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly; /* CAMBIO: Distribuye el espacio vertical de forma equitativa */
     align-items: center;
     text-align: center;
-    padding: 25px 20px 35px 20px;
+    padding: 15px 20px 20px 20px; /* CAMBIO: Reduce el padding superior de 25px a 15px */
 }
 
 /* Bloque 1: Título y Subtítulo */
@@ -162,6 +162,7 @@ button:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 10px 0; /* CAMBIO: Crea aire arriba y abajo del QR para que no pegue al subtítulo */
 }
 
 .qr-wrapper {
@@ -235,7 +236,7 @@ input[type="color"]::-webkit-color-swatch {
     padding: 25px 12px 15px 12px;
     border-radius: 20px;
     border: 2px solid #333;
-    margin-top: 20px; /* <--- ESTA LÍNEA SEPARA EL MARCO DEL SUBTÍTULO */
+    margin-top: 10px; /* <--- ESTA LÍNEA SEPARA EL MARCO DEL SUBTÍTULO */
 }
 .qr-wrapper.frame-mobile .frame-tag {
     color: #ffffff;
