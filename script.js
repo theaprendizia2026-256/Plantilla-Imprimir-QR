@@ -15,6 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("in-qr-color").addEventListener("input", renderQR);
     document.getElementById("in-qr-bg").addEventListener("input", renderQR);
 
+    // Escuchar el cambio de estilo de marco y su texto
+    document.getElementById("in-frame-style").addEventListener("change", () => {
+        toggleFrameTextInput();
+        applyFrameStyle();
+    });
+    document.getElementById("in-frame-text").addEventListener("input", applyFrameStyle);
+
     document.getElementById("btn-pdf").addEventListener("click", exportPDF);
     document.getElementById("btn-ws").addEventListener("click", sendWhatsApp);
 
@@ -69,6 +76,9 @@ function renderQR() {
             if (uploadedLogoSrc) {
                 drawLogoOnCanvas(canvas, uploadedLogoSrc);
             }
+
+            // --- AGREGAR ESTA LÍNEA ---
+            applyFrameStyle();
         }
     }, 100);
 }
