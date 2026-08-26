@@ -192,8 +192,8 @@ button:hover {
 .footer-block {
     width: 85%;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
-    padding-top: 8px;
-    margin-top: 4px; /* Crea un colchón extra de aire con el marco */
+    padding-top: 6px;
+    margin-top: 2px; /* Crea un colchón extra de aire con el marco */
 }
 
 .footer-quote {
