@@ -229,12 +229,13 @@ input[type="color"]::-webkit-color-swatch {
     transition: all 0.3s ease;
 }
 
-/* 2. Marco Teléfono */
+/* 2. Marco Teléfono - CON MARGEN SUPERIOR AÑADIDO */
 .qr-wrapper.frame-mobile {
     background: #000000;
     padding: 25px 12px 15px 12px;
     border-radius: 20px;
     border: 2px solid #333;
+    margin-top: 20px; /* <--- ESTA LÍNEA SEPARA EL MARCO DEL SUBTÍTULO */
 }
 .qr-wrapper.frame-mobile .frame-tag {
     color: #ffffff;
