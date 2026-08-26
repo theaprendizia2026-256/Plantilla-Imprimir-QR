@@ -192,7 +192,8 @@ button:hover {
 .footer-block {
     width: 85%;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
-    padding-top: 10px;
+    padding-top: 8px;
+    margin-top: 4px; /* Crea un colchón extra de aire con el marco */
 }
 
 .footer-quote {
@@ -233,10 +234,11 @@ input[type="color"]::-webkit-color-swatch {
 /* 2. Marco Teléfono - CON MARGEN SUPERIOR AÑADIDO */
 .qr-wrapper.frame-mobile {
     background: #000000;
-    padding: 25px 12px 15px 12px;
+    padding: 16px 12px 10px 12px; /* Ajuste interno: reduce alto para ganar espacio */
     border-radius: 20px;
     border: 2px solid #333;
-    margin-top: 10px; /* <--- ESTA LÍNEA SEPARA EL MARCO DEL SUBTÍTULO */
+    margin-top: 6px;       /* Aire con el subtítulo */
+    margin-bottom: 8px;    /* Aire con la línea divisoria y frase de cierre */
 }
 .qr-wrapper.frame-mobile .frame-tag {
     color: #ffffff;
