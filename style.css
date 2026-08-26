@@ -222,3 +222,80 @@ input[type="color"]::-webkit-color-swatch {
     border: none;
     border-radius: 3px;
 }
+
+/* --- Estilos para Marcos Dinámicos de QR --- */
+.qr-wrapper {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* 2. Marco Teléfono */
+.qr-wrapper.frame-mobile {
+    background: #000000;
+    padding: 25px 12px 15px 12px;
+    border-radius: 20px;
+    border: 2px solid #333;
+}
+.qr-wrapper.frame-mobile .frame-tag {
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+/* 3. Bloque Negro */
+.qr-wrapper.frame-dark-block {
+    background: #111111;
+    padding: 10px;
+    border-radius: 8px;
+}
+.qr-wrapper.frame-dark-block .frame-tag {
+    background: #000000;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 0;
+    margin-top: 6px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* 4. Borde Simple */
+.qr-wrapper.frame-simple-border {
+    border: 2px solid #000000;
+    padding: 8px;
+    border-radius: 6px;
+}
+.qr-wrapper.frame-simple-border .frame-tag {
+    color: #000000;
+    font-size: 10px;
+    font-weight: 700;
+    margin-top: 6px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* 5. Etiqueta Píldora */
+.qr-wrapper.frame-pill-tag {
+    border: 2px solid #000000;
+    padding: 8px 8px 18px 8px;
+    border-radius: 8px;
+}
+.qr-wrapper.frame-pill-tag .frame-tag {
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000000;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 12px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
