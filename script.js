@@ -11,6 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("in-paper-color").addEventListener("change", updatePaperColor);
     document.getElementById("in-size").addEventListener("change", toggleCustomSizeInput);
 
+    // --- AGREGAR ESTAS DOS LÍNEAS NUEVAS ---
+    document.getElementById("in-qr-color").addEventListener("input", renderQR);
+    document.getElementById("in-qr-bg").addEventListener("input", renderQR);
+
     document.getElementById("btn-pdf").addEventListener("click", exportPDF);
     document.getElementById("btn-ws").addEventListener("click", sendWhatsApp);
 
@@ -34,16 +38,21 @@ function handleLogoUpload(e) {
 
 function renderQR() {
     const url = document.getElementById("in-url").value.trim() || "https://instagram.com";
+
+    // Obtenemos los colores seleccionados del input tipo arcoíris
+    const qrColor = document.getElementById("in-qr-color") ? document.getElementById("in-qr-color").value : "#000000";
+    const qrBg = document.getElementById("in-qr-bg") ? document.getElementById("in-qr-bg").value : "#ffffff";
+    
     const qrContainer = document.getElementById("qr-code");
     qrContainer.innerHTML = "";
 
-    // 1. Instanciar el QR
+    // 1. Instanciar el QR con los colores personalizados
     new QRCode(qrContainer, {
         text: url,
         width: 220,
         height: 220,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
+        colorDark: qrColor,   // Color dinámico de los módulos
+        colorLight: qrBg,     // Color dinámico del fondo del QR
         correctLevel: QRCode.CorrectLevel.H
     });
 
