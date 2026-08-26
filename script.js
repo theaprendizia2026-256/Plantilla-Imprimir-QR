@@ -188,3 +188,38 @@ async function sendWhatsApp() {
     const targetUrl = phone ? `https://wa.me/${phone}?text=${msg}` : `https://wa.me/?text=${msg}`;
     window.open(targetUrl, '_blank');
 }
+
+function toggleFrameTextInput() {
+    const frameStyle = document.getElementById("in-frame-style").value;
+    const textGroup = document.getElementById("group-frame-text");
+    textGroup.style.display = (frameStyle === "none") ? "none" : "flex";
+}
+
+function applyFrameStyle() {
+    const frameStyle = document.getElementById("in-frame-style").value;
+    const frameText = document.getElementById("in-frame-text").value.trim() || "SCAN ME";
+    const qrWrapper = document.querySelector(".qr-wrapper");
+    const qrInstruction = document.querySelector(".qr-instruction");
+
+    // Limpiar clases previas de marcos
+    qrWrapper.className = "qr-wrapper frame-" + frameStyle;
+    
+    // Eliminar etiqueta previa si existía
+    const oldTag = qrWrapper.querySelector(".frame-tag");
+    if (oldTag) oldTag.remove();
+
+    if (frameStyle !== "none") {
+        const tag = document.createElement("div");
+        tag.className = "frame-tag";
+        tag.innerText = frameText;
+
+        if (frameStyle === "mobile") {
+            qrWrapper.insertBefore(tag, qrWrapper.firstChild); // Pone el texto arriba
+        } else {
+            qrWrapper.appendChild(tag); // Pone el texto abajo
+        }
+        qrInstruction.style.visibility = "hidden"; // Oculta la instrucción general para usar la del marco
+    } else {
+        qrInstruction.style.visibility = "visible";
+    }
+}
