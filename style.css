@@ -194,7 +194,7 @@ button:hover {
     width: 85%;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
     padding-top: 10px;
-    margin-bottom: 10px; /* CAMBIO: Agrega aire limpio con el borde inferior del marco */
+    margin-bottom: 12px; /* CAMBIO: Agrega aire limpio con el borde inferior del marco */
     padding-bottom: 5px;  /* CAMBIO: Separación interna protectora */
 }
 
