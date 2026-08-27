@@ -235,14 +235,14 @@ input[type="color"]::-webkit-color-swatch {
     transition: all 0.3s ease;
 }
 
-/* 2. Marco Teléfono - CON MARGEN SUPERIOR AÑADIDO */
+/* 2. Marco Teléfono - Ajustado margen inferior a 0 */
 .qr-wrapper.frame-mobile {
     background: #000000;
-    padding: 20px 12px 12px 12px;
+    padding: 16px 12px 10px 12px;
     border-radius: 20px;
     border: 2px solid #333;
-    margin-top: 8px;
-    margin-bottom: 8px; /* CAMBIO: Crea aire por abajo respecto a la línea del footer */
+    margin-top: 4px;
+    margin-bottom: 0px; /* Reducido para subir la frase */
 }
 
 /* UBICACIÓN: Buscar .qr-wrapper.frame-dark-block */
@@ -261,11 +261,12 @@ input[type="color"]::-webkit-color-swatch {
     text-transform: uppercase;
 }
 
-/* 3. Bloque Negro */
+/* 3. Bloque Negro - Ajustado margen inferior a 0 */
 .qr-wrapper.frame-dark-block {
     background: #111111;
-    padding: 10px;
+    padding: 8px;
     border-radius: 8px;
+    margin-bottom: 0px; /* Reducido para subir la frase */
 }
 .qr-wrapper.frame-dark-block .frame-tag {
     background: #000000;
@@ -314,4 +315,10 @@ input[type="color"]::-webkit-color-swatch {
     letter-spacing: 1px;
     white-space: nowrap;
     text-transform: uppercase;
+}
+
+/* Subir la frase de cierre únicamente cuando está activo el Marco 2 o Marco 3 */
+.qr-block:has(.frame-mobile) + .footer-block,
+.qr-block:has(.frame-dark-block) + .footer-block {
+    margin-top: -10px;
 }
